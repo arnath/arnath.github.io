@@ -19,7 +19,7 @@ I gave myself three additional constraints going in:
 To pull this off, I made use of two projects I found on GitHub, [nginx-proxy](https://github.com/jwilder/nginx-proxy) and [docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion). I attempted to use the nginx Docker image directly but for some reason could never get WordPress to correctly handle requests. The nginx-proxy image automatically generates nginx reverse proxy configs for containers as they are created. The companion image handles the automatic creation, renewal, and use of SSL certificates from Let's Encrypt for proxied containers. JrCs (the creater of the proxy companion) has created a good diagram that explains how they work together: 
 
 
-![Nginx proxy schema](../_assets/nginx_proxy_schema_2.png)
+![Nginx proxy schema](../assets/images/nginx_proxy_schema.png)
 
 ### docker-compose.yml
 
