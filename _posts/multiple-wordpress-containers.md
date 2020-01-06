@@ -8,14 +8,14 @@ I gave myself three additional constraints going in:
 - I wanted all the WordPress instances to share a single instance of MySQL (I ended up using MariaDB instead because boo Oracle). MySQL and MariaDB are pretty resource heavy and there didn't seem to be a good reason to run two database containers. 
 - All the websites needed to use HTTPs because this is just good practice nowadays. I also wanted HTTP to redirect to HTTPs and both `example.com` and `www.example.com` to work as addresses.
 
-To pull this off, I made use of two projects I found on GitHub, [nginx-proxy](https://github.com/jwilder/nginx-proxy) and [docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion). I attempted to use the nginx Docker image directly but for some reason could never get WordPress to correctly handle requests. The nginx-proxy image automatically generates nginx reverse proxy configs for containers as they are created. The companion image handles the automatic creation, renewal, and use of SSL certificates from Let's Encrypt for proxied containers. JrCs has created a good diagram that explains how they work together: 
+To pull this off, I made use of two projects I found on GitHub, [nginx-proxy](https://github.com/jwilder/nginx-proxy) and [docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion). I attempted to use the nginx Docker image directly but for some reason could never get WordPress to correctly handle requests. The nginx-proxy image automatically generates nginx reverse proxy configs for containers as they are created. The companion image handles the automatic creation, renewal, and use of SSL certificates from Let's Encrypt for proxied containers. JrCs (the creater of the proxy companion) has created a good diagram that explains how they work together: 
 
 
 ![Nginx proxy schema](../_assets/nginx_proxy_schema_2.png)
 
 ### docker-compose.yml
 
-You can look at and download the finished scripts in the [multiple-wordpress-containers](https://github.com/arnath/multiple-wordpress-containers) repo. Below I'll go through each part of the docker-compose.yml file to provide some detailed explanations of what's going on. 
+I posted the completed scripts and some instructions in the [multiple-wordpress-containers](https://github.com/arnath/multiple-wordpress-containers) repo. Below I'll go through each part of the docker-compose.yml file to provide some detailed explanations of what's going on. 
 
 #### Database
 
@@ -44,9 +44,9 @@ volumes:
     - database:/var/lib/mysql
     - ./mariadb:/docker-entrypoint-initdb.d
 ```
-When you define a volume with a name instead of a path like `database:...`, this creates a named, Docker managed volume. We use this to map the `/var/lib/mysql` folder from the container to the named volume because this is where the databases are stored on disk.
+When you define a volume with a name instead of a path like `database:...`, this creates a named, Docker-managed volume. We use this to map the `/var/lib/mysql` folder from the container to the named volume because this is where the databases are stored on disk.
 
-The second line copies the `mariadb/init.sh` script to the `/docker-entrypoint-initdb.d` directory in the container. Scripts in this container are run by the mariadb image on startup. The image provides a way to create a database and provide permissions using an environment variable but this only works for a single database. I wanted to use a database per site so I had to create a shell script to do this for me.
+The second line copies the `mariadb/init.sh` script to the `/docker-entrypoint-initdb.d` directory in the container. Scripts in this container are run by the mariadb image on startup. The image provides a way to create a database and provide permissions using an environment variable but this only works for a single database. I wanted to use a database per site so I had to create the shell script below to do this for me:
 
 ```bash
 #!/bin/bash
@@ -100,7 +100,25 @@ services:
         networks:
             - proxy-network
 ```
-These two blocks setup the nginx-proxy and nginx-proxy-le containers to start the Nginx reverse proxy and acquire and maintain HTTPs certificates. The instructions to set these up were pulled almost verbatim from the docs on the letsencrypt-nginx-proxy-companion so I'll be a little more brief in going over them. The proxy has to listen on both 80 and 443 in order to handle HTTP -> HTTPs redirects so I had to expose both of them as ports for the proxy container. I also added a bunch of Docker-managed volumes for things required by the proxy and the proxy companion and added them both to the proxy-network network I created earlier. 
+These two blocks setup the nginx-proxy and nginx-proxy-le containers to start the Nginx reverse proxy and acquire and maintain HTTPs certificates. 
+
+```yml
+ports:
+    - 80:80
+    - 443:443
+```
+The proxy has to listen on both ports 80 and 443 in order to handle HTTP -> HTTPs redirects. 
+
+```yml
+volumes:
+    - conf:/etc/nginx/conf.d
+    - vhost:/etc/nginx/vhost.d
+    - html:/usr/share/nginx/html
+    - dhparam:/etc/nginx/dhparam
+    - certs:/etc/nginx/certs:ro
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+```
+The proxy and the companion require a bunch of volumes to pass configuration to and from Nginx. The last line `/var/run/docker.sock:/tmp/docker.sock:ro` is used by docker-gen to listen to new containers being created and update reverse proxy configs. 
 
 #### WordPress
 
