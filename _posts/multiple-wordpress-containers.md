@@ -121,7 +121,7 @@ services:
             VIRTUAL_PORT: 443
             LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
         volumes:
-            - wordpress-site1:/var/www/html/site1
+            - wp-site1:/var/www/html
         networks:
             - proxy-network
 
@@ -142,7 +142,7 @@ services:
             VIRTUAL_PORT: 443
             LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
         volumes:
-            - wordpress-site2:/var/www/html/site2
+            - wp-site2:/var/www/html
         networks:
             - proxy-network
 ```
@@ -169,6 +169,12 @@ The WordPress image requires the `WORDPRESS_DB_HOST`, `WORDPRESS_DB_NAME`, `WORD
 
 The other environment variables are required by the proxy and the companion. `VIRTUAL_HOST` is a comma-separated list of hostnames that your site responds to. This should be set to site1.com and www.site1.com (replacing site1 with your actual domain). `VIRTUAL_PORT` is set to 443 to use HTTPs. `LETSENCRYPT_HOST` is a comma-separated list of the addresses for which you want HTTPs certificates. It doesn't currently support wildcard certificates (e.g., *.site1.com that covers both the root domain and the www subdomain) so it's set to the same value as `VIRTUAL_HOST`.
 
+```yml
+volumes:
+    - wp-site1:/var/www/html
+```
+WordPress saves its files in /var/www/html so I setup a Docker-managed volume for each site to make those files accessible on the host VPS. 
+
 #### Networks and Volumes
 ```yml
 networks:
@@ -188,4 +194,4 @@ volumes:
 The networks section of this block creates the network that all the containers are connected to as a bridge network (so the containers can talk to each other). The volumes section indicates that we want these Docker-managed volumes to be shared among containers. 
 
 ### Conclusion
-So that's basically it! The [multiple-wordpress-containers](https://github.com/arnath/multiple-wordpress-containers) repo has the finished scripts as well as instructions on how to use them. Let me know in the comments if you have any problems getting this working. 
+So that's basically it! The [multiple-wordpress-containers](https://github.com/arnath/multiple-wordpress-containers) repo has the finished scripts as well as instructions on how to use them. Let me know in the comments if you have any problems getting this working or if there's something I'm doing wrong.
