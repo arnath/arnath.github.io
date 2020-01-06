@@ -8,7 +8,9 @@ I gave myself three additional constraints going in:
 - I wanted all the WordPress instances to share a single instance of MySQL (I ended up using MariaDB instead because boo Oracle). MySQL and MariaDB are pretty resource heavy and there didn't seem to be a good reason to run two database containers. 
 - All the websites needed to use HTTPs because this is just good practice nowadays. I also wanted HTTP to redirect to HTTPs and both `example.com` and `www.example.com` to work as addresses.
 
-To pull this off, I made use of two projects I found on GitHub, [nginx-proxy](https://github.com/jwilder/nginx-proxy) and [docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion). I attempted to use the nginx Docker image directly but for some reason could never get WordPress to correctly handle requests. The nginx-proxy image automatically generates nginx reverse proxy configs for containers as they are created. The companion image handles the automatic creation, renewal, and use of Let's Encrypt certificates for proxied containers. JrCs has created a good diagram that explains how they work together: 
+To pull this off, I made use of two projects I found on GitHub, [nginx-proxy](https://github.com/jwilder/nginx-proxy) and [docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion). I attempted to use the nginx Docker image directly but for some reason could never get WordPress to correctly handle requests. The nginx-proxy image automatically generates nginx reverse proxy configs for containers as they are created. The companion image handles the automatic creation, renewal, and use of SSL certificates from Let's Encrypt for proxied containers. JrCs has created a good diagram that explains how they work together: 
+
+
 ![Nginx proxy schema](../_assets/nginx_proxy_schema_2.png)
 
 ### docker-compose.yml
