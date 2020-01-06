@@ -1,4 +1,11 @@
-# How To: Multiple WordPress sites on one VPS using Docker Compose
+---
+layout: post
+title: How to host multiple WordPress sites on one VPS using Docker Compose
+categories: [blog, how-to]
+tags: [wordpress, docker, docker-compose, vps, digitalocean]
+---
+
+# How to host Multiple WordPress sites on one VPS using Docker Compose
 
 **TLDR:** Clone the [multiple-wordpress-containers][mwp] repo and follow the instructions there. 
 
