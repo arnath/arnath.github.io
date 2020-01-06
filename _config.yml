@@ -34,6 +34,10 @@ github_username:  arnath
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - about.md
 
 # Exclude from processing.
 # The following items will not be processed, by default.
