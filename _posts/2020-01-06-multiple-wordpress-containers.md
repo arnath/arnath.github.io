@@ -44,7 +44,7 @@ volumes:
     - database:/var/lib/mysql
     - ./mariadb:/docker-entrypoint-initdb.d
 ```
-When you define a volume with a name instead of a path like `database:...`, this creates a named, Docker-managed volume. We use this to map the `/var/lib/mysql` folder from the container to the named volume because this is where the databases are stored on disk.
+When you define a volume with a name instead of a path like `database:...`, this creates a named, Docker-managed volume. I used this to map the `/var/lib/mysql` folder from the container to the named volume because this is where the databases are stored on disk.
 
 The second line copies the `mariadb/init.sh` script to the `/docker-entrypoint-initdb.d` directory in the container. Scripts in this container are run by the mariadb image on startup. The image provides a way to create a database and provide permissions using an environment variable but this only works for a single database. I wanted to use a database per site so I had to create the shell script below to do this for me:
 
@@ -100,7 +100,7 @@ services:
         networks:
             - proxy-network
 ```
-These two blocks setup the nginx-proxy and nginx-proxy-le containers to start the Nginx reverse proxy and acquire and maintain HTTPs certificates. 
+These two blocks setup the nginx-proxy and nginx-proxy-le containers to start the Nginx reverse proxy and acquire and maintain SSL certificates. 
 
 ```yml
 ports:
@@ -118,7 +118,7 @@ volumes:
     - certs:/etc/nginx/certs:ro
     - /var/run/docker.sock:/tmp/docker.sock:ro
 ```
-The proxy and the companion require a bunch of volumes to pass configuration to and from Nginx. The last line `/var/run/docker.sock:/tmp/docker.sock:ro` is used by docker-gen to listen to new containers being created and update reverse proxy configs. 
+The proxy and the companion require a bunch of volumes to pass configuration to and from Nginx. The last line, `/var/run/docker.sock:/tmp/docker.sock:ro`, is used by docker-gen to listen to new containers being created and update reverse proxy configs. 
 
 #### WordPress
 
@@ -187,7 +187,7 @@ environment:
 ```
 The WordPress image requires the `WORDPRESS_DB_HOST`, `WORDPRESS_DB_NAME`, `WORDPRESS_DB_USER`, and `WORDPRESS_DB_PASSWORD` environment variables to be initialized. It also assumes that the user you specify has full access to the database (which we setup using the MariaDB init.sh script from earlier). 
 
-The other environment variables are required by the proxy and the companion. `VIRTUAL_HOST` is a comma-separated list of hostnames that your site responds to. This should be set to site1.com and www.site1.com (replacing site1 with your actual domain). `VIRTUAL_PORT` is set to 443 to use HTTPs. `LETSENCRYPT_HOST` is a comma-separated list of the addresses for which you want HTTPs certificates. It doesn't currently support wildcard certificates (e.g., *.site1.com that covers both the root domain and the www subdomain) so it's set to the same value as `VIRTUAL_HOST`.
+The other environment variables are required by the proxy and the companion. `VIRTUAL_HOST` is a comma-separated list of hostnames that your site responds to. This should be set to `site1.com, www.site1.com` (replacing site1 with your actual domain). `VIRTUAL_PORT` is set to 443 to use HTTPs. `LETSENCRYPT_HOST` is a comma-separated list of the addresses for which you want SSL certificates. It doesn't currently support wildcard certificates (e.g., *.site1.com that covers both the root domain and the www subdomain) so it's set to the same value as `VIRTUAL_HOST`.
 
 ```yml
 volumes:
@@ -211,7 +211,7 @@ volumes:
     wordpress-site1:
     wordpress-site2:
 ```
-The networks section of this block creates the network that all the containers are connected to as a bridge network (so the containers can talk to each other). The volumes section indicates that we want these Docker-managed volumes to be shared among containers. 
+The networks section of this block creates the network that all the containers are connected to as a bridge network (so the containers can talk to each other). The volumes section indicates that I want these Docker-managed volumes to be shared among containers. Defining the volumes at the top-level like this also allows specifying additional configuration for the volumes without copying it in each container that uses them (although I didn't do this here).
 
 ### Conclusion
-So that's basically it! The [multiple-wordpress-containers](https://github.com/arnath/multiple-wordpress-containers) repo has the finished scripts as well as instructions on how to use them. Let me know in the comments if you have any problems getting this working or if there's something I'm doing wrong.
+That's basically it! The [multiple-wordpress-containers](https://github.com/arnath/multiple-wordpress-containers) repo has the finished scripts as well as instructions on how to use them. Let me know in the comments if you have any problems getting this working or if there's something I'm doing wrong.
