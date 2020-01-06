@@ -33,10 +33,12 @@ services:
 This block sets up the database container based off the [mariadb:10](https://hub.docker.com/_/mariadb) image. 
 
 
+
 ```yml
 env_file: .env
 ```
 The repo contains a sample .env file that defines some environment variables for use in the docker-compose.yml file. In this service, they are used to create the WordPress databases and assign permissions to the user account.
+
 
 
 ```yml
@@ -55,6 +57,7 @@ mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $SITE1_DB_
 mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $SITE2_DB_NAME; GRANT ALL ON $SITE2_DB_NAME.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
 ```
 This file uses the environment variables defined in the .env file to create databases for each site and assign permissions to the WordPress user account.
+
 
 
 ```yml
