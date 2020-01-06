@@ -1,6 +1,6 @@
 # How To: Multiple WordPress sites on one VPS using Docker Compose
 
-**TLDR:** Clone the [multiple-wordpress-containers](multiple-wordpress-containers) repo and follow the instructions there. 
+**TLDR:** Clone the [multiple-wordpress-containers][mwp] repo and follow the instructions there. 
 
 This week I was trying to figure out how to setup multiple WordPress sites on a single VPS (I used the smallest DigitalOcean droplet) so I could set up some blogs for my wife without paying for multiple instances. This turned into much more of an ordeal than I was expecting so I wanted to document what I found to help anyone trying to do the same thing. 
 
@@ -17,7 +17,7 @@ To pull this off, I made use of two projects I found on GitHub, [nginx-proxy](ht
 
 ### docker-compose.yml
 
-I posted the completed scripts and some instructions in the [multiple-wordpress-containers](multiple-wordpress-containers) repo. Below I'll go through each part of the docker-compose.yml file to provide some detailed explanations of what's going on. 
+I posted the completed scripts and some instructions in the [multiple-wordpress-containers][mwp] repo. Below I'll go through each part of the docker-compose.yml file to provide some detailed explanations of what's going on. 
 
 #### Database
 
@@ -216,6 +216,6 @@ volumes:
 The networks section of this block creates the network that all the containers are connected to as a bridge network (so the containers can talk to each other). The volumes section indicates that I want these Docker-managed volumes to be shared among containers. Defining the volumes at the top-level like this also allows specifying additional configuration for the volumes without copying it in each container that uses them (although I didn't do this here).
 
 ### Conclusion
-That's basically it! The [multiple-wordpress-containers](multiple-wordpress-containers) repo has the finished scripts as well as instructions on how to use them. Let me know in the comments if you have any problems getting this working or if there's something I'm doing wrong.
+That's basically it! The [multiple-wordpress-containers][mwp] repo has the finished scripts as well as instructions on how to use them. Let me know in the comments if you have any problems getting this working or if there's something I'm doing wrong.
 
-[multiple-wordpress-containers]: https://github.com/arnath/multiple-wordpress-containers
+[mwp]: https://github.com/arnath/multiple-wordpress-containers
