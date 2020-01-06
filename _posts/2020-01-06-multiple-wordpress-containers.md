@@ -1,5 +1,3 @@
-[multiple-wordpress-containers]: https://github.com/arnath/multiple-wordpress-containers
-
 # How To: Multiple WordPress sites on one VPS using Docker Compose
 
 **TLDR:** Clone the [multiple-wordpress-containers](multiple-wordpress-containers) repo and follow the instructions there. 
@@ -219,3 +217,5 @@ The networks section of this block creates the network that all the containers a
 
 ### Conclusion
 That's basically it! The [multiple-wordpress-containers](multiple-wordpress-containers) repo has the finished scripts as well as instructions on how to use them. Let me know in the comments if you have any problems getting this working or if there's something I'm doing wrong.
+
+[multiple-wordpress-containers]: https://github.com/arnath/multiple-wordpress-containers
