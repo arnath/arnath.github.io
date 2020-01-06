@@ -1,6 +1,6 @@
-# How To: Multiple WordPress sites on one DO droplet using Docker Compose
+# How To host multiple WordPress sites on one VPS using Docker Compose
 
-This week I was trying to figure out how to setup multiple WordPress sites on a single DigitalOcean droplet so I could set up some blogs for my wife without paying for multiple instances (she is just starting out so the traffic is nearly zero). This turned into much more of an ordeal than I was expecting so I wanted to document what I found and provide some more details than I was able to find by searching around. 
+This week I was trying to figure out how to setup multiple WordPress sites on a single VPS (I used the smallest DigitalOcean droplet) so I could set up some blogs for my wife without paying for multiple instances (she is just starting out so the traffic is nearly zero). This turned into much more of an ordeal than I was expecting so I wanted to document what I found and provide some more details than I was able to find by searching around. 
 
 I gave myself three additional constraints going in:
 
@@ -32,14 +32,10 @@ services:
 ```
 This block sets up the database container based off the [mariadb:10](https://hub.docker.com/_/mariadb) image. 
 
-
-
 ```yml
 env_file: .env
 ```
 The repo contains a sample .env file that defines some environment variables for use in the docker-compose.yml file. In this service, they are used to create the WordPress databases and assign permissions to the user account.
-
-
 
 ```yml
 volumes:
@@ -58,10 +54,138 @@ mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $SITE2_DB_
 ```
 This file uses the environment variables defined in the .env file to create databases for each site and assign permissions to the WordPress user account.
 
-
-
 ```yml
 networks:
 - proxy-network
 ```
 I put all the containers on a shared bridge network to allow them to communicate with each other. 
+
+#### Nginx proxy and Let's Encrypt companion
+
+```yml
+services:
+    nginx-proxy:
+        image: jwilder/nginx-proxy:alpine
+        container_name: nginx-proxy
+        restart: unless-stopped
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - conf:/etc/nginx/conf.d
+            - vhost:/etc/nginx/vhost.d
+            - html:/usr/share/nginx/html
+            - dhparam:/etc/nginx/dhparam
+            - certs:/etc/nginx/certs:ro
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+        networks:
+            - proxy-network
+
+    nginx-proxy-le:
+        depends_on:
+            - nginx-proxy
+        image: jrcs/letsencrypt-nginx-proxy-companion:latest
+        container_name: nginx-proxy-le
+        restart: unless-stopped
+        environment:
+            NGINX_PROXY_CONTAINER: nginx-proxy
+        volumes:
+            - vhost:/etc/nginx/vhost.d
+            - html:/usr/share/nginx/html
+            - dhparam:/etc/nginx/dhparam:ro
+            - certs:/etc/nginx/certs
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        networks:
+            - proxy-network
+```
+These two blocks setup the nginx-proxy and nginx-proxy-le containers to start the Nginx reverse proxy and acquire and maintain HTTPs certificates. The instructions to set these up were pulled almost verbatim from the docs on the letsencrypt-nginx-proxy-companion so I'll be a little more brief in going over them. The proxy has to listen on both 80 and 443 in order to handle HTTP -> HTTPs redirects so I had to expose both of them as ports for the proxy container. I also added a bunch of Docker-managed volumes for things required by the proxy and the proxy companion and added them both to the proxy-network network I created earlier. 
+
+#### WordPress
+
+```yml
+services:
+    wp-site1:
+        depends_on:
+            - db
+            - nginx-proxy-le
+        image: wordpress:5-php7.2
+        container_name: wp-site1
+        restart: unless-stopped
+        env_file: .env
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_NAME: ${SITE1_DB_NAME}
+            WORDPRESS_DB_USER: ${MYSQL_USER}
+            WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+            VIRTUAL_HOST: ${SITE1_HOST_NAME}
+            VIRTUAL_PORT: 443
+            LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
+        volumes:
+            - wordpress-site1:/var/www/html/site1
+        networks:
+            - proxy-network
+
+    wp-site2:
+        depends_on:
+            - db
+            - nginx-proxy-le
+        image: wordpress:5-php7.2
+        container_name: wp-site2
+        restart: unless-stopped
+        env_file: .env
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_NAME: ${SITE2_DB_NAME}
+            WORDPRESS_DB_USER: ${MYSQL_USER}
+            WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+            VIRTUAL_HOST: ${SITE2_HOST_NAME}
+            VIRTUAL_PORT: 443
+            LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
+        volumes:
+            - wordpress-site2:/var/www/html/site2
+        networks:
+            - proxy-network
+```
+
+These two blocks setup the WordPress sites. You can add additional sites by copying one of these, adding the required environment variables to the .env file, and adding the volume to the top-level volumes list that will be discussed below. 
+
+```yml
+image: wordpress:5-php7.2
+```
+I used the standard WordPress Apache image for this because the nginx-proxy doesn't support FastCGI right now. Unfortunately there's not a WordPress image that uses Alpine and not FastCGI and I didn't feel like making one just for this.  
+
+```yml
+env_file: .env
+environment:
+    WORDPRESS_DB_HOST: db:3306
+    WORDPRESS_DB_NAME: ${SITE1_DB_NAME}
+    WORDPRESS_DB_USER: ${MYSQL_USER}
+    WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+    VIRTUAL_HOST: ${SITE1_HOST_NAME}
+    VIRTUAL_PORT: 443
+    LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
+```
+The WordPress image requires the `WORDPRESS_DB_HOST`, `WORDPRESS_DB_NAME`, `WORDPRESS_DB_USER`, and `WORDPRESS_DB_PASSWORD` environment variables to be initialized. It also assumes that the user you specify has full access to the database (which we setup using the MariaDB init.sh script from earlier). 
+
+The other environment variables are required by the proxy and the companion. `VIRTUAL_HOST` is a comma-separated list of hostnames that your site responds to. This should be set to site1.com and www.site1.com (replacing site1 with your actual domain). `VIRTUAL_PORT` is set to 443 to use HTTPs. `LETSENCRYPT_HOST` is a comma-separated list of the addresses for which you want HTTPs certificates. It doesn't currently support wildcard certificates (e.g., *.site1.com that covers both the root domain and the www subdomain) so it's set to the same value as `VIRTUAL_HOST`.
+
+#### Networks and Volumes
+```yml
+networks:
+    proxy-network:
+        driver: bridge
+
+volumes:
+    database:
+    conf:
+    vhost:
+    html:
+    dhparam:
+    certs:
+    wordpress-site1:
+    wordpress-site2:
+```
+The networks section of this block creates the network that all the containers are connected to as a bridge network (so the containers can talk to each other). The volumes section indicates that we want these Docker-managed volumes to be shared among containers. 
+
+### Conclusion
+So that's basically it! The [multiple-wordpress-containers](https://github.com/arnath/multiple-wordpress-containers) repo has the finished scripts as well as instructions on how to use them. Let me know in the comments if you have any problems getting this working. 
