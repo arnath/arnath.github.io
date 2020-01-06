@@ -1,12 +1,12 @@
-# How To host multiple WordPress sites on one VPS using Docker Compose
+# How To: Multiple WordPress sites on one VPS using Docker Compose
 
-This week I was trying to figure out how to setup multiple WordPress sites on a single VPS (I used the smallest DigitalOcean droplet) so I could set up some blogs for my wife without paying for multiple instances (she is just starting out so the traffic is nearly zero). This turned into much more of an ordeal than I was expecting so I wanted to document what I found and provide some more details than I was able to find by searching around. 
+This week I was trying to figure out how to setup multiple WordPress sites on a single VPS (I used the smallest DigitalOcean droplet) so I could set up some blogs for my wife without paying for multiple instances. This turned into much more of an ordeal than I was expecting so I wanted to document what I found to help anyone trying to do the same thing. 
 
 I gave myself three additional constraints going in:
 
 - I wanted to use Docker Compose to setup the droplet. This is partially because I just haven't played with Docker all that much professionally and partially because it makes it easier to drop the same configuration on a VPS hosted by someone other than DigitalOcean (as opposed to having to redo all the command line config manually). 
 - I wanted all the WordPress instances to share a single instance of MySQL (I ended up using MariaDB instead because boo Oracle). MySQL and MariaDB are pretty resource heavy and there didn't seem to be a good reason to run two database containers. 
-- All the websites needed to use HTTPs because this is just good practice nowadays. I also wanted HTTP to redirect to HTTPs and both example.com and www.example.com to work as addresses.
+- All the websites needed to use HTTPs because this is just good practice nowadays. I also wanted HTTP to redirect to HTTPs and both `example.com` and `www.example.com` to work as addresses.
 
 To pull this off, I made use of two projects I found on GitHub, [nginx-proxy](https://github.com/jwilder/nginx-proxy) and [docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion). I attempted to use the nginx Docker image directly but for some reason could never get WordPress to correctly handle requests. The nginx-proxy image automatically generates nginx reverse proxy configs for containers as they are created. The companion image handles the automatic creation, renewal, and use of Let's Encrypt certificates for proxied containers. JrCs has created a good diagram that explains how they work together: 
 ![Nginx proxy schema](../_assets/nginx_proxy_schema_2.png)
