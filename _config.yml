@@ -1,13 +1,16 @@
 remote_theme: jekyll/minima
 
 title: vijayp.dev
-author: Vijay Prakash
-email: me@vijayp.dev
 description: > # this means to ignore newlines until "show_excerpts:"
   Been coding since I can remember. Currently a professional software
   engineer for over 10 years, primarily working in backend development
   using .NET. Site is extremely WIP.
 show_excerpts: true # set to true to show excerpts on the homepage
+google_analytics: UA-157461519-1 # TODO: Figure out how to use a different analytics service for this.
+
+author:
+  name: Vijay Prakash
+  #email: me@vijayp.dev
 
 # Minima date format
 # refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
