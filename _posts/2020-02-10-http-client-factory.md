@@ -6,7 +6,7 @@ categories: [blog, .net core, .net standard, http, asp.net]
 tags: [.net, .net, http, asp.net]
 ---
 
-**TLDR:** Install the [Arnath.StandaloneHttpClientFactory][nuget] NuGet package and follow the usage instructions [here][github].
+**TL;DR:** Install the [Arnath.StandaloneHttpClientFactory][nuget] NuGet package and follow the usage instructions [here][github].
 
 I was reading some stuff about .NET Core recently and stumbled across a reference to the `IHttpClientFactory` interface that was introduced as part of .NET Core 2.1. I got really excited when I found it because the default .NET `HttpClient` class has a bunch of non-obvious issues that can cause some serious problems when used in an application that makes a lot of requests (like a web service). However, I was quickly disappointed to find that it, like many of Microsoft's recent web-related .NET Core developments, was totally tied into ASP.NET Core and its dependency injection framework. After doing some digging about whether there was a standalone implementation and failing to find one, I decided to write my own.
 
