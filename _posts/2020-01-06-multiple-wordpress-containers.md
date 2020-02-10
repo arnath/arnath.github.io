@@ -6,7 +6,7 @@ categories: [blog, how-to]
 tags: [wordpress, docker, docker-compose, vps, digitalocean]
 ---
 
-**TLDR:** Clone the [multiple-wordpress-containers][mwp] repo and follow the instructions there. 
+**TL;DR:** Clone the [multiple-wordpress-containers][mwp] repo and follow the instructions there. 
 
 This week I was trying to figure out how to setup multiple WordPress sites on a single VPS (I used the smallest DigitalOcean droplet) so I could set up some blogs for my wife without paying for multiple instances. This turned into much more of an ordeal than I was expecting so I wanted to document what I found to help anyone trying to do the same thing. 
 
