@@ -8,7 +8,7 @@ tags: [.net, .net, http, asp.net]
 
 **TLDR:** Install the [Arnath.StandaloneHttpClientFactory][nuget] NuGet package and follow the usage instructions [here][github].
 
-I was reading some stuff about .NET Core recently and stumbled across a reference to the `IHttpClientFactory` that was introduced as part of .NET Core 2.1. I got really excited when I found it because the default .NET `HttpClient` class has a bunch of non-obvious issues that can cause some serious problems when used in an application that makes a lot of requests (like a web service). However, I was quickly disappointed to find that it, like many of Microsoft's recent web-related .NET Core developments, was totally tied into ASP.NET Core and its dependency injection framework. After doing some digging about whether there was a standalone implementation and failing to find one, I decided to write my own and wanted to talk about the experience. 
+I was reading some stuff about .NET Core recently and stumbled across a reference to the `IHttpClientFactory` interface that was introduced as part of .NET Core 2.1. I got really excited when I found it because the default .NET `HttpClient` class has a bunch of non-obvious issues that can cause some serious problems when used in an application that makes a lot of requests (like a web service). However, I was quickly disappointed to find that it, like many of Microsoft's recent web-related .NET Core developments, was totally tied into ASP.NET Core and its dependency injection framework. After doing some digging about whether there was a standalone implementation and failing to find one, I decided to write my own.
 
 ### Issues with HttpClient
 I didn't find out that the .NET `HttpClient` had some weird behavior until a couple months ago when a coworker pointed it out to me and linked me to this blog post: [You're using HttpClient wrong and it is destabilizing your software](https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/). Basically, when you dispose an `HttpClient` instance, the underlying socket is not immediately released. If you make a lot of HTTP requests and wrap every call you make in `using (HttpClient client = new HttpClient())` (which is a totally reasonable way to think you could use it), this will eventually cause you to run out of sockets in your OS. To combat this, Microsoft has recommended that (in .NET Standard and Framework at least), use a single `HttpClient` instance for the lifetime of your app and don't dispose it until your app exits.
@@ -31,17 +31,17 @@ This resulted in a situation where your options were either take on all the depe
 ### StandaloneHttpClientFactory
 To make this easier, I wrote a little library called [Arnath.StandaloneHttpClientFactory][nuget]. The library creates its own version of `IHttpClientFactory` and an implementation called `StandaloneHttpClientFactory` that implements the behavior above. If you use the library in .NET Core, it creates a single lazy instance of `SocketsHttpHandler` and uses it to create new `HttpClient` instances every time you call `IHttpClientFactory.CreateClient()`. If you use it in .NET Standard, it creates a single instance of `HttpClient` and a custom handler that sets `ServicePoint.ConnectionLeaseTimeout` for every request (if it has not already been set). It also creates a wrapper that handles the `Dispose` behavior correctly so you can happily do this for every single HTTP request:
 ```csharp
-StandaloneHttpClientFactory httpClientFactory = new StandaloneHttpClientFactory();
+IHttpClientFactory httpClientFactory = new StandaloneHttpClientFactory();
 using (HttpClient client = httpClientFactory.CreateClient())
 {
     // Use the client.
 }
 ```
 
-You can use the library by downloading the [NuGet package][nuget] or checking out the source code on [Github][github].
+You should create the factory when your app starts and call `Dispose` on it when your app exits. You can use the library by downloading the [NuGet package][nuget] or checking out the source code on [Github][github]. There's also some more detailed usage instructions on the GitHub page.
 
 ### Conclusion
-Hopefully this makes it easier for you to use `HttpClient` in .NET. Let me know in the comments if you have any issues or find any bugs (or open issues on GitHub). 
+Hopefully this makes it easier for you to use `HttpClient` in .NET. I found a cool blog post [here](https://www.stevejgordon.co.uk/httpclient-connection-pooling-in-dotnet-core) that goes into more detail on all this stuff. Let me know in the comments if you have any issues or find any bugs (or open issues on GitHub).
 
 [nuget]: https://www.nuget.org/packages/Arnath.StandaloneHttpClientFactory
 [github]: https://github.com/arnath/standalone-httpclientfactory
