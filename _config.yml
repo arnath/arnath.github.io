@@ -6,7 +6,11 @@ description: > # this means to ignore newlines until "show_excerpts:"
   engineer for over 10 years, primarily working in backend development
   using .NET. Site is extremely WIP.
 show_excerpts: true # set to true to show excerpts on the homepage
-google_analytics: UA-157461519-1 # TODO: Figure out how to use a different analytics service for this.
+
+# I'm using GoatCounter instead of Google Analytics. It's easier to
+# just replace the google-analytics.html snippet so have to define
+# this to a dummy value.
+google_analytics: foo
 
 author:
   name: Vijay Prakash
