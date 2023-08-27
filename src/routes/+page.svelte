@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<div class="container center-self">
+<main>
   <div class="title">vijayp.dev</div>
   <div>
     Backend engineer with over 10 years of experience working on high scale distributed systems
@@ -9,17 +9,18 @@
   <a class="gap" href="/about">About</a>
   <a href="/blog">Blog</a>
   <a href="/projects">Projects</a>
-</div>
+</main>
 
 <style>
-  .container {
+  main {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 0.75em;
 
-    padding: 2em;
-    margin-top: 10vh;
+    margin: 10vh auto auto auto;
     max-width: 30rem;
+    padding: 2em;
   }
 
   .title {

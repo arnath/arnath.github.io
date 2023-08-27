@@ -1,18 +1,19 @@
 <header>
   <div class="container">
-    <a href="#top"><h2>vijayp.dev</h2></a>
-    <a href="https://www.paypal.com/donate/?business=4E9UH7HNM2GP8&no_recurring=0&currency_code=USD"
-      >Donate</a>
+    <a class="title" href="#top">vijayp.dev</a>
+    <a href="/about">About</a>
+    <a href="/blog">Blog</a>
+    <a href="/projects">Projects</a>
   </div>
 </header>
 
 <style>
   header {
-    background-color: #0066b2;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1;
+    padding: 1em 0;
 
     display: flex;
     justify-content: center;
@@ -21,15 +22,23 @@
   .container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: start;
+    align-items: baseline;
+    gap: 1em;
     
-    max-width: 60rem;
+    max-width: 50rem;
     width: 100%;
   }
 
   a {
     text-decoration: none;
-    color: #ffffff;
+    font-size: 20px;
+    color: #0066b2;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 0.5em;
   }
 </style>

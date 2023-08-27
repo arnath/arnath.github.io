@@ -14,7 +14,7 @@
     gap: 1rem;
 
     margin: 60px auto auto auto;
-    max-width: 60rem;
+    max-width: 50rem;
     padding-top: 1em;
     padding-bottom: 1em;
   }
