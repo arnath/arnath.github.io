@@ -28,12 +28,7 @@
     
     max-width: 50rem;
     width: 100%;
-  }
-
-  a {
-    text-decoration: none;
     font-size: 20px;
-    color: #0066b2;
   }
 
   .title {

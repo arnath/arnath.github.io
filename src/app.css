@@ -44,6 +44,15 @@ textarea {
   max-width: 100%;
 }
 
+a {
+  text-decoration: none;
+  color: #0066b2;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
 /* Global convenience classes */
 .stretch {
   width: 100%;

@@ -1,30 +1,32 @@
 <script lang="ts">
   import projects from '$lib/assets/projects.json';
-  import ProjectCard from '$lib/components/ProjectCard.svelte';
 </script>
 
+<div class="container">
 <h1>Projects</h1>
 <p>
 I really love playing with new languages, frameworks, and technologies. I
 almost always have some kind of project I'm tinkering on. Few of them reach
 any sort of completion but some of the more interesting ones are below.
 </p>
-<div class="grid">
 {#each projects as project}
-  <ProjectCard {project} />
+  <div class="project">
+    <a href={project.link} ><h3>{project.name}</h3></a>
+    <p>{project.description}</p>
+  </div>
 {/each}
 </div>
 
 <style>
-  h1, p {
-    margin: 0;
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 0 1rem;
+  .project {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
   }
 </style>
