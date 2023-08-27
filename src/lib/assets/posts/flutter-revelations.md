@@ -1,9 +1,8 @@
 ---
+title: Things I wish I'd known when I started using Flutter
+date: 2023-08-27
 published: true
-postDate: 2023-08-27
 ---
-
-# Things I wish I'd known when I started using Flutter
 
 Recently, I've been playing around in Flutter as a way to make iOS apps.
 I **despise** Swift, XCode, and Apple's documentation. For me, using

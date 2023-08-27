@@ -7,5 +7,6 @@
   "pluginSearchDirs": ["."],
   "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
   "bracketSameLine": true,
-  "svelteBracketNewLine": false
+  "svelteBracketNewLine": false,
+  "bracketSpacing": true
 }
