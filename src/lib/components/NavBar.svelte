@@ -1,6 +1,6 @@
 <header>
   <div class="container">
-    <a class="title" href="#top">vijayp.dev</a>
+    <a class="title" href="/">vijayp.dev</a>
     <a href="/about">About</a>
     <a href="/blog">Blog</a>
     <a href="/projects">Projects</a>
