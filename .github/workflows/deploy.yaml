@@ -18,8 +18,6 @@ jobs:
         - name: Install dependencies
           run: npm install
         - name: Build
-          env:
-            BASE_PATH: '/arnath.github.io'
           run: npm run build
         - name: Upload Artifacts
           uses: actions/upload-pages-artifact@v1
