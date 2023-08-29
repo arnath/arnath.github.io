@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from "$app/paths";
 </script>
 
 <main>
@@ -6,9 +7,9 @@
   <div>
     Software engineer with over 10 years of experience working on high scale distributed systems
   </div>
-  <a class="gap" href="/about">About</a>
-  <a href="/blog">Blog</a>
-  <a href="/projects">Projects</a>
+  <a class="gap" href="{base}/about">About</a>
+  <a href="{base}/blog">Blog</a>
+  <a href="{base}/projects">Projects</a>
 </main>
 
 <style>

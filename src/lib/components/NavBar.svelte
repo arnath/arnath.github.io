@@ -1,9 +1,13 @@
+<script lang="ts">
+  import { base } from "$app/paths";
+</script>
+
 <header>
   <div class="container">
-    <a class="title" href="/">vijayp.dev</a>
-    <a href="/about">About</a>
-    <a href="/blog">Blog</a>
-    <a href="/projects">Projects</a>
+    <a class="title" href="{base}/">vijayp.dev</a>
+    <a href="{base}/about">About</a>
+    <a href="{base}/blog">Blog</a>
+    <a href="{base}/projects">Projects</a>
   </div>
 </header>
 

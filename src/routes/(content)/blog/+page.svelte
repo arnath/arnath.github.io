@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { base } from "$app/paths";
   import type { PageData } from "./$types";
 
   export let data: PageData;
@@ -25,7 +26,7 @@
 
   {#each data.posts as post}
   <div class="post">
-    <a href={`/blog/${post.slug}`}><h3>{post.title}</h3></a>
+    <a href="{base}/blog/{post.slug}"><h3>{post.title}</h3></a>
     <div class="subtext">{getLocalizedDateString(post.date)}</div>
   </div>
   {/each}
