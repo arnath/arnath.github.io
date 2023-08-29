@@ -3,8 +3,8 @@
   import NavBar from "$lib/components/NavBar.svelte";
 </script>
 
-<NavBar />
 <main>
+  <NavBar />
   <slot />
 </main>
 
@@ -14,8 +14,8 @@
     flex-direction: column;
     gap: 1rem;
 
-    margin: 60px auto auto auto;
     max-width: 45rem;
-    padding: 1em 0 4em;
+    margin: auto auto 4rem;
+    padding: 0 1.5rem;
   }
 </style>
