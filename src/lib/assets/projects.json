@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Sydney",
+        "description": ".NET Core REST Framework for side projects. It's designed to avoid \"magic\" and be simple to use.",
+        "link": "https://github.com/arnath/sydney"
+    },
+    {
+        "name": "Standalone HttpClientFactory",
+        "description": "An HTTP client factory for .NET Core and .NET Standard that doesn't require ASP.NET Core dependencies and follows the best practices from Microsoft.",
+        "link": "https://github.com/arnath/standalone-httpclientfactory"
+    },
+    {
+        "name": "vijayp.dev",
+        "description": "This website! Written using SvelteKit, mdsvex, and Github Pages.",
+        "link": "https://github.com/arnath/arnath.github.io"
+    }
+]

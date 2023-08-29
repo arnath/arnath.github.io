@@ -1,9 +1,8 @@
 ---
-layout: post
 title: Standalone HTTP client factory for .NET Core and .NET Standard
 description: Standalone HTTP client factory for .NET Core and .NET Standard with no ASP.NET Core dependencies.
-categories: [blog, .net core, .net standard, http, asp.net]
-tags: [.net, .net, http, asp.net]
+date: 2020-02-10
+published: false
 ---
 
 **TL;DR:** Install the [Arnath.StandaloneHttpClientFactory][nuget] NuGet package and follow the usage instructions [here][github].
