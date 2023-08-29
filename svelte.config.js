@@ -7,6 +7,8 @@ const mdsvexOptions = {
   extensions: [".md"],
 };
 
+const dev = process.argv.includes('dev');
+
 /** @type {import('@sveltejs/kit').Config} */
 export default {
   // Consult https://kit.svelte.dev/docs/integrations#preprocessors
@@ -16,7 +18,7 @@ export default {
   kit: {
     adapter: adapter(),
     paths: {
-        base: process.env.NODE_ENV === 'production' ? '/sveltekit-github-pages' : '',
-    }
+        base: dev ? '' : process.env.BASE_PATH,
+      }
   },
 };
