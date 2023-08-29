@@ -16,6 +16,6 @@
 
     margin: 60px auto auto auto;
     max-width: 45rem;
-    padding: 1em 2em 4em;
+    padding: 1em 0 4em;
   }
 </style>
