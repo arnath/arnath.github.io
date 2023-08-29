@@ -14,6 +14,7 @@
     width: 100%;
     z-index: 1;
     padding: 1em 0;
+    background-color: #EDF2F8;
 
     display: flex;
     justify-content: center;

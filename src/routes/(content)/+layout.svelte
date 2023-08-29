@@ -1,4 +1,5 @@
 <script lang="ts">
+  import "../../app.css";
   import NavBar from "$lib/components/NavBar.svelte";
 </script>
 
@@ -16,6 +17,6 @@
     margin: 60px auto auto auto;
     max-width: 50rem;
     padding-top: 1em;
-    padding-bottom: 1em;
+    padding-bottom: 4em;
   }
 </style>

@@ -3,9 +3,13 @@
 
   export let data: PageData;
 
-  console.log(data);
+  const dateString = new Date(data.date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 </script>
 
 <h1>{data.title}</h1>
-<div>{data.date}</div>
+<div class="subtext">{dateString}</div>
 <svelte:component this={data.content} />

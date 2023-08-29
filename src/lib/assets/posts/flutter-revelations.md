@@ -5,11 +5,12 @@ published: true
 ---
 
 Recently, I've been playing around in Flutter as a way to make iOS apps.
-I **despise** Swift, XCode, and Apple's documentation. For me, using
-frameworks has been much easier than trying to write native iOS code.
-Having tried a lot of them at this point, Flutter seems like the current
-best option. However, there are definitely some things I wish I had
+I hate basically everything about Apple's iOS development environment, especially
+Swift, XCode, Apple's documentation. For me, using frameworks has been much easier
+than trying to write native iOS code. Having tried a lot of them at this point, Flutter
+seems like the current best option. However, there are definitely some things I wish I had
 known when I started using Flutter.
+<br />
 
 ## Objects are cheap and composability is key
 
@@ -22,6 +23,7 @@ Conceptually, objects are intended to be cheap in Flutter and the primary
 way to build a UI is through composing widgets together. So you don't need
 to feel bad wrapping that widget in an `Expanded` wrapped in a `Column`
 wrapped in a `Padding`!
+<br />
 
 ## Most UI components don't store any state
 
@@ -29,7 +31,6 @@ Most (all?) built-in UI components in Flutter don't store any state. For example
 the `Checkbox` widget doesn't store a checked/unchecked value. The `TextField`
 widget doesn't store the current text in the field. There's a couple interesting
 things that come from this:
-
 1. This is why the various controller classes for widgets (like `TextEditingController`)
    exist. The widgets themselves don't store any state so Flutter provides the
    controller classes to do that. You can also choose to store the state yourself.
@@ -45,11 +46,10 @@ things that come from this:
 management in Flutter. After trying a lot of different options, I believe that really
 simple state management is the best option for most cases. What does this mean?
 There's a couple built-in classes that will handle 99% of your state management needs:
-[`ValueNotifier`][vn]/[`ValueListenableBuilder`][vlb] and ['ChangeNotifier'][cn]/
-[`ListenableBuilder`][lb].
+[ValueNotifier][vn]/[ChangeNotifier][cn] and [ValueListenableBuilder][vlb]/
+[ListenableBuilder][lb].
 
 At a high level, I do the following for widgets with state:
-
 1. Extend `StatefulWidget`
 1. Have your `State<T>` class either implement/mixin `ChangeNotifier` or expose
    some `ValueNotifiers`.
@@ -60,6 +60,7 @@ I like this because it allows me to be as granular as I want, either by defining
 a bunch of small `ValueNotifiers` or having the whole state class extend `ChangeNotifier`.
 It does the same thing on the widget builder side, where you can wrap your entire
 widget in `ListenableBuilder` or just individual UI elements.
+<br />
 
 ## Don't use the Cupertino library
 
