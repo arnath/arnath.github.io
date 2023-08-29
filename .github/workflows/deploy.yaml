@@ -8,7 +8,8 @@ jobs:
   build_site:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v3
+        - name: Checkout
+          uses: actions/checkout@v3
         - name: Install Node.js
           uses: actions/setup-node@v3
           with:
@@ -19,9 +20,7 @@ jobs:
         - name: Build
           env:
             BASE_PATH: '/arnath.github.io'
-          run: |
-            npm run build
-            touch build/.nojekyll
+          run: npm run build
         - name: Upload Artifacts
           uses: actions/upload-pages-artifact@v1
           with:
