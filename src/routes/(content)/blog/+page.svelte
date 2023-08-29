@@ -25,7 +25,7 @@
 
   {#each data.posts as post}
   <div class="post">
-    <a href={`/blog/${post.slug}`}><h2>{post.title}</h2></a>
+    <a href={`/blog/${post.slug}`}><h3>{post.title}</h3></a>
     <div class="subtext">{getLocalizedDateString(post.date)}</div>
   </div>
   {/each}

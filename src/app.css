@@ -1,7 +1,7 @@
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
   font-weight: 400;
 
   background-color: #EDF2F8;
@@ -49,7 +49,12 @@ a {
   color: #0066b2;
 }
 
-h1, h2, h3, p {
+h1, h2, h3 {
+  margin: 0;
+  line-height: 1.25;
+}
+
+p, ol, ul {
   margin: 0;
 }
 
@@ -79,5 +84,5 @@ code {
 .subtext {
   color: #696969;
   /* Reduce line height for consistent spacing. */
-  line-height: 16px;
+  line-height: 1;
 }

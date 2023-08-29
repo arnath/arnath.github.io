@@ -4,7 +4,7 @@
 <main>
   <div class="title">vijayp.dev</div>
   <div>
-    Backend engineer with over 10 years of experience working on high scale distributed systems
+    Software engineer with over 10 years of experience working on high scale distributed systems
   </div>
   <a class="gap" href="/about">About</a>
   <a href="/blog">Blog</a>

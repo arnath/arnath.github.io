@@ -13,7 +13,7 @@
     top: 0;
     width: 100%;
     z-index: 1;
-    padding: 1em 0;
+    padding: 1em 2em;
     background-color: #EDF2F8;
 
     display: flex;
@@ -27,7 +27,7 @@
     align-items: baseline;
     gap: 1em;
     
-    max-width: 50rem;
+    max-width: 45rem;
     width: 100%;
     font-size: 20px;
   }
@@ -35,6 +35,5 @@
   .title {
     font-size: 24px;
     font-weight: bold;
-    margin-right: 0.5em;
   }
 </style>

@@ -39,6 +39,7 @@ things that come from this:
    toggles visually. In Flutter, clicking a checkbox does nothing by default. You
    have to implement the `onChanged` handler and have that cause a redraw by
    updating your application state. This one took me a while to wrap my head around.
+<br />
 
 ## Simple state management is usually best
 
