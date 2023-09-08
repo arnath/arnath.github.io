@@ -1,7 +1,7 @@
 ---
 title: TIL you can host a single page app using S3 + a CDN
-date: 2023-09-01
-published: false
+date: 2023-09-08
+published: true
 ---
 
 I've known for a while that you can host a [static site][static] using S3. This
