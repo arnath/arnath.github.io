@@ -7,7 +7,7 @@ const mdsvexOptions = {
   extensions: [".md"],
 };
 
-const dev = process.argv.includes('dev');
+const dev = process.argv.includes("dev");
 
 /** @type {import('@sveltejs/kit').Config} */
 export default {
@@ -18,7 +18,7 @@ export default {
   kit: {
     adapter: adapter(),
     paths: {
-        base: dev ? '' : process.env.BASE_PATH,
-      }
+      base: dev ? "" : process.env.BASE_PATH,
+    },
   },
 };

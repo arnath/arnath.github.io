@@ -4,7 +4,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  background-color: #EDF2F8;
+  background-color: #edf2f8;
   color: #1a1b1e;
 
   font-synthesis: none;
@@ -29,7 +29,7 @@ img {
 
   /* Creates an inline low-quality placeholder */
   background-size: cover;
-  background-image: url('');
+  background-image: url("");
 }
 
 input {
@@ -49,19 +49,24 @@ a {
   color: #0066b2;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin: 0;
   line-height: 1.25;
 }
 
-p, ol, ul {
+p,
+ol,
+ul {
   margin: 0;
 }
 
 code {
-  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
+  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono",
+    "Courier New", monospace;
   font-size: 15px;
-  color: #EDF2F8;
+  color: #edf2f8;
   background: #0066b2;
   text-shadow: none;
   padding: 2px;
