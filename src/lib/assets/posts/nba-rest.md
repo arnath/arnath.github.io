@@ -8,15 +8,16 @@ Last week, the NBA voted on and announced some updates to its
 [player resting policy](espn). There's details in the link but at a high level,
 their goal is to increase player participation in the regular season, especially
 for stars and for nationally televised games. The general reaction from around
-the NBA world seems to be "this makes sense, stars should play". However, I
-think these policy changes are incredibly shortsighted and will certainly lead
-to increased player injuries, which are already [higher than ever](inj). Nothing
-about the NBA's policy changes here considers incentives.
+the NBA world seems to be "this makes sense, stars should play". I'd like to
+make the argument that these policy changes are incredibly shortsighted. They
+will certainly lead to increased player injuries (which are already
+[higher than ever](inj)). Why? Because nothing about the NBA's policy changes
+considers the incentives.
 
 [Incentives](inc) are one of the basic concepts in Economics (and one of the
-only ones I remember from college econ) and are, in my opinion, the most
+only ones I remember from college econ). They are, in my opinion, the most
 important thing driving negotiations like this one. As an example of this,
-consider the US Congress. We, the people, elect Congresspeople with the hope
+consider the US Congress. We, the people, elect Congress members with the hope
 that they will serve the country and their constituents. However, the incentive
 structure for Congress doesn't give you anything if you serve your constituents
 effectively. What it _does_ reward is staying in Congress. While you're there,
@@ -53,9 +54,11 @@ policy goes into effect this season:
   get your rest somewhere. And since you can't rest both stars on the same
   night, you're going to have to alternate which means someone will almost
   always be resting.
-- There will be some weird circumstances that generate controversy. For example,
-  it seems that based on the rules, Jamal Murray doesn't count as a star player
-  so he and Jokic can rest whenever they want.
+- There will be some weird circumstances that generate controversy, like what
+  happened when they tied salary limits to All-NBA and All-Star. There's already
+  been one: the rules don't really affect the Denver Nuggets. Jamal Murray has
+  never made All-Star or All-NBA so he's not considered a "star" by the policy.
+  He and Jokic will be able to totally ignore that part of the new rules.
 
 [espn]:
   https://www.espn.com/nba/story/_/id/38386013/how-nba-new-rules-resting-stars-work
