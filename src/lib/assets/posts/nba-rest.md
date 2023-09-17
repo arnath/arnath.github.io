@@ -1,7 +1,7 @@
 ---
-title: WIP NBA Resting Policy
+title: The NBA doesn't understand the incentives around resting
 date: 2023-09-17
-published: false
+published: true
 ---
 
 Last week, the NBA voted on and announced some updates to its
