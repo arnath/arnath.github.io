@@ -12,6 +12,13 @@ export const load: PageLoad = async () => {
     if (file && typeof file === "object" && "metadata" in file && slug) {
       const metadata = file.metadata as Omit<Post, "slug">;
       const post = { ...metadata, slug } satisfies Post;
+
+      // List all posts on dev.
+      if (!post.published && import.meta.env.DEV) {
+        post.published = true;
+        post.title = "[wip] " + post.title;
+      }
+
       post.published && posts.push(post);
     }
   }
