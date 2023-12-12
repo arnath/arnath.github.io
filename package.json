@@ -32,5 +32,8 @@
     "typescript": "^5.3.3",
     "vite": "^4.5.1"
   },
+  "engines": {
+    "node": "v20.10.0"
+  },
   "packageManager": "pnpm@8.12.0+sha256.553e4eb0e2a2c9abcb419b3262bdc7aee8ae3c42e2301a1807d44575786160c9"
 }
