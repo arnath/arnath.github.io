@@ -3,7 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: main
-  workflow_dispatch:
 
 jobs:
   build_site:
@@ -11,10 +10,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+      - name: Setup Corepack
+        run: corepack enable
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Build
         run: pnpm build
       - name: Upload Artifacts
