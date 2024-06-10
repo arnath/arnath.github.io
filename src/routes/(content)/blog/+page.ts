@@ -30,7 +30,7 @@ function shouldShowPost(post: Post): boolean {
   const postDate = new Date(post.date);
   
   // Show posts that are published with a date after today.
-  const shouldShow = post.published && now < postDate;
+  const shouldShow = post.published && now > postDate;
   if (!shouldShow && import.meta.env.DEV) {
     // On dev, show everything.
     post.title = "[wip] " + post.title;
