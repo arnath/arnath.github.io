@@ -13,13 +13,7 @@ export const load: PageLoad = async () => {
       const metadata = file.metadata as Omit<Post, "slug">;
       const post = { ...metadata, slug } satisfies Post;
 
-      // List all posts on dev.
-      if (!post.published && import.meta.env.DEV) {
-        post.published = true;
-        post.title = "[wip] " + post.title;
-      }
-
-      post.published && posts.push(post);
+      shouldShowPost(post) && posts.push(post);
     }
   }
 
@@ -30,3 +24,18 @@ export const load: PageLoad = async () => {
 
   return { posts };
 };
+
+function shouldShowPost(post: Post): boolean {
+  const now = new Date();
+  const postDate = new Date(post.date);
+  
+  // Show posts that are published with a date after today.
+  const shouldShow = post.published && now > postDate;
+  if (!shouldShow && import.meta.env.DEV) {
+    // On dev, show everything.
+    post.title = "[wip] " + post.title;
+    return true;
+  }
+
+  return shouldShow;
+}
