@@ -11,7 +11,7 @@ any sort of completion but some of the more interesting ones are below.
 </p>
 {#each projects as project}
   <div class="project">
-    <a href={project.link} ><h3>{project.name}</h3></a>
+    <a href={project.link}><h3>{project.name}</h3></a>
     <p>{project.description}</p>
   </div>
 {/each}
