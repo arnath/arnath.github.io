@@ -4,15 +4,14 @@ date: 2023-09-17
 published: true
 ---
 
-Last week, the NBA voted on and announced some updates to its
-[player resting policy][espn]. There's details in the link but at a high level,
-their goal is to increase player participation in the regular season, especially
-for stars and for nationally televised games. The general reaction from around
-the NBA world seems to be "this makes sense, stars should play". I'd like to
-make the argument that these policy changes are incredibly shortsighted. They
-will certainly lead to increased player injuries (which are already
-[higher than ever][inj]). Why? Because nothing about the NBA's policy changes
-considers the incentives.
+Last week, the NBA voted on and announced some updates to its [player resting
+policy][espn]. There's details in the link but at a high level, their goal is to
+increase player participation in the regular season, especially for stars and
+for nationally televised games. The general reaction from around the NBA world
+seems to be "this makes sense, stars should play". I'd like to make the argument
+that these policy changes are incredibly shortsighted. They will certainly lead
+to increased player injuries (which are already [higher than ever][inj]). Why?
+Because nothing about the NBA's policy changes considers the incentives.
 
 [Incentives][inc] are one of the basic concepts in Economics (and one of the
 only ones I remember from college econ). They are, in my opinion, the most

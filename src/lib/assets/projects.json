@@ -1,5 +1,10 @@
 [
   {
+    "name": "Better Apple Job Search",
+    "description": "Job postings from Apple's career site with drastically better search.",
+    "link": "/projects/better-apple-job-search"
+  },
+  {
     "name": "Sydney",
     "description": ".NET Core REST Framework for side projects. It's designed to avoid \"magic\" and be simple to use.",
     "link": "https://github.com/arnath/sydney"

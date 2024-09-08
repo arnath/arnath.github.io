@@ -6,7 +6,8 @@
   <div class="title">vijayp.dev</div>
   <div>
     <!-- Don't forget to update the other number in the About page! -->
-    Software engineer with over 12 years of experience working on high scale distributed systems
+    Software engineer with over 12 years of experience working on high scale distributed
+    systems
   </div>
   <a class="gap" href="{base}/about">About</a>
   <a href="{base}/blog">Blog</a>

@@ -18,17 +18,17 @@
 <div class="container">
   <h1>Blog</h1>
   <p>
-    I don't write often but I like to make posts about things that I found
-    hard to Google when I had to look them up. The topics will vary although
-    almost all are tech-related. 
+    I don't write often but I like to make posts about things that I found hard
+    to Google when I had to look them up. The topics will vary although almost
+    all are tech-related.
   </p>
   <br />
 
   {#each data.posts as post}
-  <div class="post">
-    <a href="{base}/blog/{post.slug}"><h3>{post.title}</h3></a>
-    <div class="subtext">{getLocalizedDateString(post.date)}</div>
-  </div>
+    <div class="post">
+      <a href="{base}/blog/{post.slug}"><h3>{post.title}</h3></a>
+      <div class="subtext">{getLocalizedDateString(post.date)}</div>
+    </div>
   {/each}
 </div>
 
@@ -46,4 +46,3 @@
     margin-bottom: 1em;
   }
 </style>
-
