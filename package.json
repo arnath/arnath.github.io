@@ -17,7 +17,8 @@
     "better-sqlite3": "^11.2.1",
     "gridjs": "^6.2.0",
     "gridjs-svelte": "^2.1.1",
-    "mdsvex": "^0.12.3"
+    "mdsvex": "^0.12.3",
+    "svelte-material-icons": "^3.0.5"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.4",

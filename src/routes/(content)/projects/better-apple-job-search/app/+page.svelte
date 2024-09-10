@@ -57,7 +57,8 @@
 <div class="container">
   <h1>Better Apple Job Search: App</h1>
   <form method="POST" use:enhance>
-    <input type="search" />
+    <input type="search" placeholder="Enter search query ..." />
+    <input type="submit" value="Search" />
   </form>
   <div class="grid">
     <SvelteGrid {...gridConfig} bind:instance={gridInstance}/>
