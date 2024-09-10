@@ -1,11 +1,15 @@
 <script lang="ts">
-  import Grid from "gridjs-svelte";
+  import SvelteGrid from "gridjs-svelte";
   import { enhance } from "$app/forms";
   import type { PageData } from "./$types";
-  import type { Config } from "gridjs";
+  import type { Config, Grid, Row } from "gridjs";
   import type { Job } from "$lib/types";
 
   export let data: PageData;
+  let gridInstance: Grid | undefined;
+
+  // For some reason, the Svelte binding for this event doesn't expose the row.
+  $: gridInstance?.on("rowClick", (_, r) => window.open(r.cell(0).data as string));
 
   const gridConfig: Partial<Config> = {
     data: data.jobs,
@@ -13,6 +17,11 @@
     search: false,
     sort: true,
     columns: [
+      // We expose this as a hidden column so it can be used in the rowClick handler.
+      {
+        id: "link",
+        hidden: true,
+      },
       {
         id: "postDate",
         name: "Post Date",
@@ -21,7 +30,7 @@
       {
         id: "title",
         name: "Job Title",
-        width: "40%",
+        width: "30%",
       },
       {
         id: "teamName",
@@ -41,7 +50,7 @@
         name: "Remote OK?",
         formatter: (cell: number) => cell ? "Yes" : "No",
       },
-    ]
+    ],
   };
 </script>
 
@@ -51,7 +60,7 @@
     <input type="search" />
   </form>
   <div class="grid">
-    <Grid {...gridConfig} />
+    <SvelteGrid {...gridConfig} bind:instance={gridInstance}/>
   </div>
 </div>
 
@@ -67,5 +76,9 @@
   .grid {
     margin-left: -25%;
     margin-right: -25%;
+  }
+
+  .grid:hover {
+    cursor: pointer
   }
 </style>

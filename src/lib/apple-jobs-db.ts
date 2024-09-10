@@ -7,7 +7,7 @@ const db = new Database("./src/lib/assets/apple-jobs.db", {
 });
 
 export function getJobs(): Job[] {
-  const statement = db.prepare("SELECT * FROM jobs LIMIT 5");
+  const statement = db.prepare("SELECT * FROM jobs");
   const result = statement.all() as Job[];
 
   return result;
