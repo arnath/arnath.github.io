@@ -13,6 +13,6 @@ export type Job = {
   title: string;
   summary: string;
   teamName: string | undefined;
-  locations: string[];
+  locations: string;
   isRemote: boolean;
 }

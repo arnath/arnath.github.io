@@ -15,6 +15,8 @@
   "dependencies": {
     "@rodneylab/svelte-social-icons": "^0.0.30",
     "better-sqlite3": "^11.2.1",
+    "gridjs": "^6.2.0",
+    "gridjs-svelte": "^2.1.1",
     "mdsvex": "^0.12.3"
   },
   "devDependencies": {

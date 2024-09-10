@@ -14,7 +14,7 @@
     flex-direction: column;
     gap: 1rem;
 
-    max-width: 45rem;
+    max-width: 55%;
     margin: auto auto 4rem;
     padding: 0 1.5rem;
   }
