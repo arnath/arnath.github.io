@@ -1,4 +1,4 @@
-import type { PageServerLoad } from "./$types";
+import type { PageServerLoad, RequestEvent } from "./$types";
 import type { Actions } from "./$types";
 import { getJobs } from "$lib/apple-jobs-db";
 
@@ -12,4 +12,9 @@ export const load: PageServerLoad = async () => {
   };
 };
 
-export const actions = { default: async (event) => {} } satisfies Actions;
+export const actions = {
+  default: async ({ request }: RequestEvent) => {
+    const formData = await request.formData();
+
+  }
+} satisfies Actions;
