@@ -41,11 +41,7 @@
       {
         id: "locations",
         name: "Locations",
-        data: (row: Job) => {
-          // The fetcher stores this array as a JSON string.
-          const locations: string[] = JSON.parse(row.locations);
-          return locations.join("\n");
-        }
+        data: (row: Job) => row.locations.join("\n"),
       },
       {
         id: "isRemote",

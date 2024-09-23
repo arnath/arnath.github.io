@@ -8,11 +8,11 @@ export type Post = {
 
 export type Job = {
   id: string;
-  link: URL;
+  link: URL | undefined;
   postDate: Date;
   title: string;
-  summary: string;
+  description: string;
   teamName: string | undefined;
-  locations: string;
+  locations: string[];
   isRemote: boolean;
 }

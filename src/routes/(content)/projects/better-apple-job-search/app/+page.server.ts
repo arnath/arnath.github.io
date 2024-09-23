@@ -1,20 +1,18 @@
 import type { PageServerLoad, RequestEvent } from "./$types";
 import type { Actions } from "./$types";
-import { getJobs } from "$lib/apple-jobs-db";
+import { SupabaseClient } from "$lib/supabase-client";
 
 export const prerender = false;
 
 export const load: PageServerLoad = async () => {
-  const jobs = getJobs();
+  const supabaseClient = new SupabaseClient();
+  const jobs = await supabaseClient.fetchJobs();
 
   return {
-    jobs
+    jobs,
   };
 };
 
 export const actions = {
-  default: async ({ request }: RequestEvent) => {
-    const formData = await request.formData();
-
-  }
+  default: async () => {},
 } satisfies Actions;
