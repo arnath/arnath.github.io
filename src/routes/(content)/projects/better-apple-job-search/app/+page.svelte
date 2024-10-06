@@ -14,35 +14,45 @@
             dataName: "postDate",
             displayName: "Post Date",
             isSortable: true,
+            textAlign: "center",
+            width: "13%",
         },
         {
             dataName: "title",
             displayName: "Job Title",
             isSortable: true,
+            textAlign: "left",
+            width: "auto",
         },
         {
             dataName: "teamName",
             displayName: "Team Name",
             isSortable: true,
+            textAlign: "left",
+            width: "20%",
         },
         {
             dataName: "locations",
             displayName: "Locations",
             isSortable: true,
             converter: (data) => data.join("\n"),
+            textAlign: "left",
+            width: "20%",
         },
         {
             dataName: "isRemote",
-            displayName: "Remote OK?",
+            displayName: "Remote",
             isSortable: false,
             converter: (data) => (data ? "Yes" : "No"),
+            textAlign: "center",
+            width: "10%",
         },
     ];
 </script>
 
 <div class="container">
     <h1>Better Apple Job Search: App</h1>
-    <form method="POST" use:enhance>
+    <form method="GET">
         <div class="search-row">
             <input
                 type="search"
@@ -50,7 +60,6 @@
                 class="search-bar"
                 placeholder="Enter query string ..."
                 bind:value={queryString} />
-            <!-- <button><FilterCogOutline size="24px" /></button> -->
             <input type="submit" value="Search" />
         </div>
     </form>
@@ -60,8 +69,6 @@
 </div>
 
 <style>
-    @import "https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css";
-
     .container {
         display: flex;
         flex-direction: column;
@@ -82,26 +89,5 @@
 
     .search-bar {
         flex-grow: 1;
-    }
-
-    .case-sensitive-option {
-        display: flex;
-        direction: row;
-        gap: 0.25em;
-        align-items: center;
-    }
-
-    input[type="checkbox"] {
-        width: 24px;
-        height: 24px;
-    }
-
-    .grid {
-        margin-left: -25%;
-        margin-right: -25%;
-    }
-
-    .grid:hover {
-        cursor: pointer;
     }
 </style>
