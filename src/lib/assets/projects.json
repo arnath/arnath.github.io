@@ -10,6 +10,11 @@
     "link": "https://github.com/arnath/standalone-httpclientfactory"
   },
   {
+    "name": "Flan",
+    "description": "A federated Flutter plugin to send local notifications. Currently only supports iOS. Support for other platforms is planned.",
+    "link": "https://pub.dev/packages/flan"
+  },
+  {
     "name": "vijayp.dev",
     "description": "This website! Written using SvelteKit, mdsvex, and Github Pages.",
     "link": "https://github.com/arnath/arnath.github.io"
