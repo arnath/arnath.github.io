@@ -18,7 +18,8 @@ export const load: PageLoad = async () => {
   }
 
   posts = posts.sort(
-    (first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
+    (first, second) =>
+      new Date(second.date).getTime() - new Date(first.date).getTime()
   );
 
   return { posts };
