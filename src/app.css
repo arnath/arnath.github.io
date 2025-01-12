@@ -47,6 +47,8 @@ textarea {
 a {
   text-decoration: none;
   color: #0066b2;
+  font-size: 16px;
+  line-height: 1;
 }
 
 h1,
@@ -63,8 +65,7 @@ ul {
 }
 
 code {
-  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono",
-    "Courier New", monospace;
+  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
   font-size: 15px;
   color: #edf2f8;
   background: #0066b2;
