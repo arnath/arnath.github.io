@@ -3,10 +3,10 @@
 </script>
 
 <header>
-    <a class="title" href="{base}/">vijayp.dev</a>
-    <a href="{base}/about">About</a>
-    <a href="{base}/blog">Blog</a>
-    <a href="{base}/projects">Projects</a>
+  <a class="title" href="{base}/">vijayp.dev</a>
+  <a href="{base}/about">About</a>
+  <a href="{base}/blog">Blog</a>
+  <a href="{base}/projects">Projects</a>
 </header>
 
 <style>
@@ -16,7 +16,7 @@
     width: 100%;
     z-index: 1;
     padding: 1rem 0;
-    background-color: #EDF2F8;
+    background-color: #edf2f8;
     font-size: 20px;
 
     display: flex;

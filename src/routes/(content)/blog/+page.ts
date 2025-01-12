@@ -18,8 +18,7 @@ export const load: PageLoad = async () => {
   }
 
   posts = posts.sort(
-    (first, second) =>
-      new Date(second.date).getTime() - new Date(first.date).getTime()
+    (first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
   );
 
   return { posts };
@@ -28,7 +27,7 @@ export const load: PageLoad = async () => {
 function shouldShowPost(post: Post): boolean {
   const now = new Date();
   const postDate = new Date(post.date);
-  
+
   // Show posts that are published with a date after today.
   const shouldShow = post.published && now > postDate;
   if (!shouldShow && import.meta.env.DEV) {
