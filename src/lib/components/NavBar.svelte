@@ -10,7 +10,8 @@
     <a href="{base}/projects">Projects</a>
   </div>
   <div class="right">
-    <a href="https://github.com/arnath"><SocialIcons network="github" width="28" height="28" /></a>
+    <a href="https://github.com/arnath"
+      ><SocialIcons network="github" width="28" height="28" /></a>
     <a href="https://www.linkedin.com/in/vpdev"
       ><SocialIcons network="linkedin" width="28" height="28" /></a>
   </div>

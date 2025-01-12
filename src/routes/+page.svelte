@@ -6,8 +6,8 @@
   <div class="title">vijayp.dev</div>
   <div>
     <!-- Don't forget to update the other number in the About page! -->
-    Backend engineer with over 15 years of experience solving problems, leading projects, and scaling
-    distributed systems.
+    Backend engineer with over 15 years of experience solving problems, leading projects,
+    and scaling distributed systems.
   </div>
   <a class="gap" href="{base}/blog">Blog</a>
   <a class="gap" href="{base}/projects">Projects</a>
