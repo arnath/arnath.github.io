@@ -1,8 +1,8 @@
 ---
 title: Standalone HTTP client factory for .NET Core and .NET Standard
 description:
-  Standalone HTTP client factory for .NET Core and .NET Standard with no ASP.NET
-  Core dependencies.
+    Standalone HTTP client factory for .NET Core and .NET Standard with no
+    ASP.NET Core dependencies.
 date: 2020-02-10
 published: false
 ---

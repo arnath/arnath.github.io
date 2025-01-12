@@ -60,7 +60,7 @@ policy goes into effect this season:
   He and Jokic will be able to totally ignore that part of the new rules.
 
 [espn]:
-  https://www.espn.com/nba/story/_/id/38386013/how-nba-new-rules-resting-stars-work
+    https://www.espn.com/nba/story/_/id/38386013/how-nba-new-rules-resting-stars-work
 [inj]: https://journals.sagepub.com/doi/full/10.1177/23259671221121116
 [inc]: https://www.econlib.org/library/Topics/College/incentives.html
 [sch]: https://sports.yahoo.com/nba-limits-back-back-games-161533055.html

@@ -36,4 +36,4 @@ deploying single-page apps. A couple other caveats you should be aware of:
 [static]: https://en.wikipedia.org/wiki/Static_web_page
 [spa]: https://en.wikipedia.org/wiki/Single-page_application
 [bpa]:
-  https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html
+    https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html

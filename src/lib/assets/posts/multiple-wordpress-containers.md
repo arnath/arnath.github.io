@@ -52,16 +52,16 @@ going on.
 
 ```yml
 services:
-  db:
-    image: mariadb:10
-    container_name: db
-    restart: unless-stopped
-    env_file: .env
-    volumes:
-      - database:/var/lib/mysql
-      - ./mariadb:/docker-entrypoint-initdb.d
-    networks:
-      - proxy-network
+    db:
+        image: mariadb:10
+        container_name: db
+        restart: unless-stopped
+        env_file: .env
+        volumes:
+            - database:/var/lib/mysql
+            - ./mariadb:/docker-entrypoint-initdb.d
+        networks:
+            - proxy-network
 ```
 
 This block sets up the database container based off the
@@ -77,8 +77,8 @@ WordPress databases and assign permissions to the user account.
 
 ```yml
 volumes:
-  - database:/var/lib/mysql
-  - ./mariadb:/docker-entrypoint-initdb.d
+    - database:/var/lib/mysql
+    - ./mariadb:/docker-entrypoint-initdb.d
 ```
 
 When you define a volume with a name instead of a path like `database:...`, this
@@ -105,7 +105,7 @@ databases for each site and assign permissions to the WordPress user account.
 
 ```yml
 networks:
-  - proxy-network
+    - proxy-network
 ```
 
 I put all the containers on a shared bridge network to allow them to communicate
@@ -115,39 +115,39 @@ with each other.
 
 ```yml
 services:
-  nginx-proxy:
-    image: jwilder/nginx-proxy:alpine
-    container_name: nginx-proxy
-    restart: unless-stopped
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - conf:/etc/nginx/conf.d
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - dhparam:/etc/nginx/dhparam
-      - certs:/etc/nginx/certs:ro
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    networks:
-      - proxy-network
+    nginx-proxy:
+        image: jwilder/nginx-proxy:alpine
+        container_name: nginx-proxy
+        restart: unless-stopped
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - conf:/etc/nginx/conf.d
+            - vhost:/etc/nginx/vhost.d
+            - html:/usr/share/nginx/html
+            - dhparam:/etc/nginx/dhparam
+            - certs:/etc/nginx/certs:ro
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+        networks:
+            - proxy-network
 
-  nginx-proxy-le:
-    depends_on:
-      - nginx-proxy
-    image: jrcs/letsencrypt-nginx-proxy-companion:latest
-    container_name: nginx-proxy-le
-    restart: unless-stopped
-    environment:
-      NGINX_PROXY_CONTAINER: nginx-proxy
-    volumes:
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - dhparam:/etc/nginx/dhparam:ro
-      - certs:/etc/nginx/certs
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks:
-      - proxy-network
+    nginx-proxy-le:
+        depends_on:
+            - nginx-proxy
+        image: jrcs/letsencrypt-nginx-proxy-companion:latest
+        container_name: nginx-proxy-le
+        restart: unless-stopped
+        environment:
+            NGINX_PROXY_CONTAINER: nginx-proxy
+        volumes:
+            - vhost:/etc/nginx/vhost.d
+            - html:/usr/share/nginx/html
+            - dhparam:/etc/nginx/dhparam:ro
+            - certs:/etc/nginx/certs
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        networks:
+            - proxy-network
 ```
 
 These two blocks setup the nginx-proxy and nginx-proxy-le containers to start
@@ -155,8 +155,8 @@ the Nginx reverse proxy and acquire and maintain SSL certificates.
 
 ```yml
 ports:
-  - 80:80
-  - 443:443
+    - 80:80
+    - 443:443
 ```
 
 The proxy has to listen on both ports 80 and 443 in order to handle HTTP ->
@@ -164,12 +164,12 @@ HTTPs redirects.
 
 ```yml
 volumes:
-  - conf:/etc/nginx/conf.d
-  - vhost:/etc/nginx/vhost.d
-  - html:/usr/share/nginx/html
-  - dhparam:/etc/nginx/dhparam
-  - certs:/etc/nginx/certs:ro
-  - /var/run/docker.sock:/tmp/docker.sock:ro
+    - conf:/etc/nginx/conf.d
+    - vhost:/etc/nginx/vhost.d
+    - html:/usr/share/nginx/html
+    - dhparam:/etc/nginx/dhparam
+    - certs:/etc/nginx/certs:ro
+    - /var/run/docker.sock:/tmp/docker.sock:ro
 ```
 
 The proxy and the companion require a bunch of volumes to pass configuration to
@@ -181,47 +181,47 @@ proxy configs.
 
 ```yml
 services:
-  wp-site1:
-    depends_on:
-      - db
-      - nginx-proxy-le
-    image: wordpress:5-php7.2
-    container_name: wp-site1
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_NAME: ${SITE1_DB_NAME}
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-      VIRTUAL_HOST: ${SITE1_HOST_NAME}
-      VIRTUAL_PORT: 443
-      LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
-    volumes:
-      - wp-site1:/var/www/html
-    networks:
-      - proxy-network
+    wp-site1:
+        depends_on:
+            - db
+            - nginx-proxy-le
+        image: wordpress:5-php7.2
+        container_name: wp-site1
+        restart: unless-stopped
+        env_file: .env
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_NAME: ${SITE1_DB_NAME}
+            WORDPRESS_DB_USER: ${MYSQL_USER}
+            WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+            VIRTUAL_HOST: ${SITE1_HOST_NAME}
+            VIRTUAL_PORT: 443
+            LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
+        volumes:
+            - wp-site1:/var/www/html
+        networks:
+            - proxy-network
 
-  wp-site2:
-    depends_on:
-      - db
-      - nginx-proxy-le
-    image: wordpress:5-php7.2
-    container_name: wp-site2
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_NAME: ${SITE2_DB_NAME}
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-      VIRTUAL_HOST: ${SITE2_HOST_NAME}
-      VIRTUAL_PORT: 443
-      LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
-    volumes:
-      - wp-site2:/var/www/html
-    networks:
-      - proxy-network
+    wp-site2:
+        depends_on:
+            - db
+            - nginx-proxy-le
+        image: wordpress:5-php7.2
+        container_name: wp-site2
+        restart: unless-stopped
+        env_file: .env
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_NAME: ${SITE2_DB_NAME}
+            WORDPRESS_DB_USER: ${MYSQL_USER}
+            WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+            VIRTUAL_HOST: ${SITE2_HOST_NAME}
+            VIRTUAL_PORT: 443
+            LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
+        volumes:
+            - wp-site2:/var/www/html
+        networks:
+            - proxy-network
 ```
 
 These two blocks setup the WordPress sites. You can add additional sites by
@@ -241,13 +241,13 @@ this.
 ```yml
 env_file: .env
 environment:
-  WORDPRESS_DB_HOST: db:3306
-  WORDPRESS_DB_NAME: ${SITE1_DB_NAME}
-  WORDPRESS_DB_USER: ${MYSQL_USER}
-  WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-  VIRTUAL_HOST: ${SITE1_HOST_NAME}
-  VIRTUAL_PORT: 443
-  LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
+    WORDPRESS_DB_HOST: db:3306
+    WORDPRESS_DB_NAME: ${SITE1_DB_NAME}
+    WORDPRESS_DB_USER: ${MYSQL_USER}
+    WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+    VIRTUAL_HOST: ${SITE1_HOST_NAME}
+    VIRTUAL_PORT: 443
+    LETSENCRYPT_HOST: ${SITE2_HOST_NAME}
 ```
 
 The WordPress image requires the `WORDPRESS_DB_HOST`, `WORDPRESS_DB_NAME`,
@@ -266,7 +266,7 @@ both the root domain and the www subdomain) so it's set to the same value as
 
 ```yml
 volumes:
-  - wp-site1:/var/www/html
+    - wp-site1:/var/www/html
 ```
 
 WordPress saves its files in /var/www/html so I setup a Docker-managed volume
@@ -276,18 +276,18 @@ for each site to make those files accessible on the host VPS.
 
 ```yml
 networks:
-  proxy-network:
-    driver: bridge
+    proxy-network:
+        driver: bridge
 
 volumes:
-  database:
-  conf:
-  vhost:
-  html:
-  dhparam:
-  certs:
-  wordpress-site1:
-  wordpress-site2:
+    database:
+    conf:
+    vhost:
+    html:
+    dhparam:
+    certs:
+    wordpress-site1:
+    wordpress-site2:
 ```
 
 The networks section of this block creates the network that all the containers

@@ -1,95 +1,95 @@
 :root {
-  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
 
-  background-color: #edf2f8;
-  color: #1a1b1e;
+    background-color: #edf2f8;
+    color: #1a1b1e;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 img {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 
-  /* Creates an inline low-quality placeholder */
-  background-size: cover;
-  background-image: url("");
+    /* Creates an inline low-quality placeholder */
+    background-size: cover;
+    background-image: url("");
 }
 
 input {
-  font-size: 16px;
-  padding: 10px;
+    font-size: 16px;
+    padding: 10px;
 }
 
 textarea {
-  font-size: 16px;
-  padding: 10px;
-  resize: none;
-  max-width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    resize: none;
+    max-width: 100%;
 }
 
 a {
-  text-decoration: none;
-  color: #0066b2;
-  font-size: 16px;
-  line-height: 1;
+    text-decoration: none;
+    color: #0066b2;
+    font-size: 16px;
+    line-height: 1;
 }
 
 h1,
 h2,
 h3 {
-  margin: 0;
-  line-height: 1.25;
+    margin: 0;
+    line-height: 1.25;
 }
 
 p,
 ol,
 ul {
-  margin: 0;
+    margin: 0;
 }
 
 code {
-  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono",
-    "Courier New", monospace;
-  font-size: 15px;
-  color: #edf2f8;
-  background: #0066b2;
-  text-shadow: none;
-  padding: 2px;
-  border-radius: 4px;
+    font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono",
+        "Courier New", monospace;
+    font-size: 15px;
+    color: #edf2f8;
+    background: #0066b2;
+    text-shadow: none;
+    padding: 2px;
+    border-radius: 4px;
 }
 
 /* Global convenience classes */
 .stretch {
-  width: 100%;
+    width: 100%;
 }
 
 .svg {
-  filter: invert(1);
+    filter: invert(1);
 }
 
 .center-self {
-  align-self: center;
+    align-self: center;
 }
 
 .subtext {
-  color: #696969;
-  /* Reduce line height for consistent spacing. */
-  line-height: 1;
+    color: #696969;
+    /* Reduce line height for consistent spacing. */
+    line-height: 1;
 }
