@@ -6,10 +6,9 @@
   <div class="title">vijayp.dev</div>
   <div>
     <!-- Don't forget to update the other number in the About page! -->
-    Software engineer with over 12 years of experience working on high scale distributed systems
+    Backend engineer with over 15 years of experience solving problems, leading projects, and scaling distributed systems.
   </div>
-  <a class="gap" href="{base}/about">About</a>
-  <a href="{base}/blog">Blog</a>
+  <a class="gap" href="{base}/blog">Blog</a>
   <a href="{base}/projects">Projects</a>
 </main>
 
@@ -21,7 +20,7 @@
     gap: 0.75em;
 
     margin: 10vh auto auto auto;
-    max-width: 30rem;
+    max-width: 35rem;
     padding: 2em;
   }
 

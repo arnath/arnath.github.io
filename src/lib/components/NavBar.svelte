@@ -4,7 +4,6 @@
 
 <header>
   <a class="title" href="{base}/">vijayp.dev</a>
-  <a href="{base}/about">About</a>
   <a href="{base}/blog">Blog</a>
   <a href="{base}/projects">Projects</a>
 </header>
