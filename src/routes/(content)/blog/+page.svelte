@@ -18,8 +18,9 @@
 <div class="container">
   <h1>Blog</h1>
   <p>
-    I don't write often but I like to make posts about things that I found hard to Google when I had
-    to look them up. The topics will vary although almost all are tech-related.
+    I don't write often but I like to make posts about things that I found hard
+    to Google when I had to look them up. The topics will vary although almost
+    all are tech-related.
   </p>
   <br />
 
