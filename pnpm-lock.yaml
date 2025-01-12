@@ -14,6 +14,9 @@ importers:
       '@eslint/js':
         specifier: ^9.17.0
         version: 9.18.0
+      '@rodneylab/svelte-social-icons':
+        specifier: ^0.0.31
+        version: 0.0.31(svelte@5.17.3)
       '@sveltejs/adapter-static':
         specifier: ^3.0.6
         version: 3.0.8(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.17.3)(vite@5.4.11))(svelte@5.17.3)(vite@5.4.11))
@@ -299,6 +302,11 @@ packages:
 
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
+
+  '@rodneylab/svelte-social-icons@0.0.31':
+    resolution: {integrity: sha512-M5KKxmwwuVK7eUIzrRY11+Dmj1ElQwvPFzPb2pBo4c6daBcu/CBYMotyafo7ZM+8E1S3qOz3ruhS3Wqq8SX1Kw==}
+    peerDependencies:
+      svelte: '>=3 <6'
 
   '@rollup/rollup-android-arm-eabi@4.30.1':
     resolution: {integrity: sha512-pSWY+EVt3rJ9fQ3IqlrEUtXh3cGqGtPDH1FQlNZehO2yYxCHEX1SPsz1M//NXwYfbTlcKr9WObLnJX9FsS9K1Q==}
@@ -1305,6 +1313,10 @@ snapshots:
       fastq: 1.18.0
 
   '@polka/url@1.0.0-next.28': {}
+
+  '@rodneylab/svelte-social-icons@0.0.31(svelte@5.17.3)':
+    dependencies:
+      svelte: 5.17.3
 
   '@rollup/rollup-android-arm-eabi@4.30.1':
     optional: true
